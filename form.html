@@ -2,6 +2,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Form</title>
 </head>
 <body style="font-family: montserrat; background-color: #2b2b2b;">
@@ -10,30 +12,47 @@
             padding: 10px; font-size: larger; border: none; 
             box-shadow: 0px 0px 5px 0.5px rgba(0,0,0,0.25);
         }
+        
         input[type=text]:hover {
             box-shadow: 0px 0px 7.5px 0.5px rgba(0,0,0,0.5);
         }
+        
         input[type=text]:focus {
             outline: 2.5px solid #2b8aff; box-shadow: 0px 0px 7.5px 0.5px rgba(0,0,0,0.5);
         }
+        
         label {
             font-size: x-large;
         }
+        
         input[type=button] {
             width: 120px; height: 55px; font-size: x-large; 
             margin-left: calc(50% - 60px); margin-top: 20px; 
             background-color: whitesmoke; border: none;
         }
+        
         input[type=button]:hover {
             /* background-color: white; */
             box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.5);
             border: 1px solid #2b8aff;
         }
+        
         input[type=button]:active {
             box-shadow: inset 0px 0px 5px 0.5px rgba(0,0,0,0.5);
         }
+        
         input[type=button]:focus {
             outline: none;
+        }
+        
+        #widget {
+            bottom: 0;
+            left: 0;
+            position: fixed;
+            padding: 25px;
+            color: azure;
+            font-size: 75px;
+            font-weight: 200;
         }
     </style>
     <div style="height: 100%; display: flex; justify-content: center; align-items: center;">
@@ -80,6 +99,47 @@
                 <input type="button" value="Submit">
             </a>
         </form>
+    </div>
+    <div id="widget" style="font-family: 'Comfortaa', cursive;">
+        <span id="weather"></span>&deg C
+        <br>
+        <span id="date" style="font-size: 50px; font-family: montserrat;"></span>
+        <script>
+            navigator.geolocation.getCurrentPosition ((position) => {
+                console.log (position.coords.latitude, position.coords.longitude);
+                var xhr = new XMLHttpRequest();
+                xhr.addEventListener("readystatechange", function () {
+                    if(this.readyState === 4) {
+                        $(document).ready(() => {
+                            $("#weather").ready(() => {
+                                $("#weather").text(Math.round(JSON.parse(this.responseText)['main']['temp'] - 273.15));
+                            })
+                        })
+                    }
+                });
+                xhr.open("GET", "https://api.openweathermap.org/data/2.5/weather?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude +  "&appid=f85211722ef46bf1ad91518984bc083f");
+                xhr.send();
+            }, (error) => {
+                var xhr = new XMLHttpRequest();
+                xhr.addEventListener("readystatechange", function () {
+                    if(this.readyState === 4) {
+                        $(document).ready(() => {
+                            $("#weather").ready(() => {
+                                $("#weather").text(Math.round(JSON.parse(this.responseText)['main']['temp'] - 273.15));
+                            })
+                        })
+                    }
+                });
+                xhr.open("GET", "https://api.openweathermap.org/data/2.5/weather?lat=28.7041&lon=77.1025&appid=f85211722ef46bf1ad91518984bc083f");
+                xhr.send();
+            });
+
+            $(document).ready(() => {
+                $("#date").ready(() => {
+                    $("#date").text("Wed, 30");
+                })
+            });
+        </script>
     </div>
 </body>
 </html>
