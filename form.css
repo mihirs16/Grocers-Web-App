@@ -1,0 +1,75 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: light;
+}
+
+label {
+    font-size: 30px;
+}
+
+td {
+    /* padding: 10px */
+}
+
+input[type=text] {
+    color: rgba(0,0,0,0.8);
+    padding: 15px; font-size: larger; border: none; 
+    box-shadow: 0px 0px 5px 0.5px rgba(0,0,0,0.25);
+    border-radius: 20px;
+}
+
+input[type=text]:hover {
+    box-shadow: 0px 0px 7.5px 0.5px rgba(0,0,0,0.5);
+}
+
+input[type=text]:focus {
+    border-radius: 20px;
+    /* outline: 2.5px solid #2b8aff;  */
+    outline: none;
+    box-shadow: 0px 0px 7.5px 0.5px rgba(0,0,0,0.5);
+}
+
+/* .card {
+    height: 350px;
+    width: 600px;
+    background-color: snow;
+    border-radius: 25px;
+    -webkit-box-shadow: 0px 0px 10px 2.5px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 0px 10px 2.5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 10px 2.5px rgba(0, 0, 0, 0.5);
+} */
+
+.formicons {
+    height: 40px;
+    width: 40px;
+}
+
+#main {
+    height: 100%;
+    width: 100%;
+}
+
+#parent-right {
+    height: 100%;
+    /* width: 100%; */
+    background-color: saddlebrown;
+    background: url('assets/retro-computer-wallpaper.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#parent-left {
+    height: 100%;
+    width: 10%;
+    background-color: royalblue;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+}
+
+#login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
