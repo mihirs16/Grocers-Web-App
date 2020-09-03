@@ -2,42 +2,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet"> -->
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,900;1,400;1,500&display=swap" rel="stylesheet"> -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&family=Parisienne&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="form.css">
     <title>Form</title>
 </head>
 <body>
-    <table id="main">
-        <tr>
-            <td>
-                <div id='parent-left'>
-                    <div class='card' id='login' >
-                        <form action="">
-                            <table>
-                                <tr>
-                                    <td><img src="assets/username.svg" alt="" class='formicons'/></td>
-                                    <td><label for="">Username</label></td>
-                                    <td><input type="text" /></td>
-                                </tr>
-                                <tr>
-                                    <td><img src="assets/password.svg" alt="" class='formicons'/></td>
-                                    <td><label for="">Password</label></td>
-                                    <td><input type="text" /></td>
-                                </tr>
-                            </table>
-                        </form>
+    <div id="left" class='parent'>
+        <div id="login">
+            <form action="">
+                <div id='fieldholder'>
+                    <div id="header">
+                        <table>
+                            <tr>
+                                <td>
+                                    <img src="assets/store.svg" alt="" height="40px" width="40px" style='margin-left: calc(50% - 20px);'>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id='title'>
+                                    Grocers
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id='prompt'>
+                        <h1>Log in</h1>
+                    </div>
+                    <div class="field">
+                        <table id='fieldscaffolding'>
+                            <tr>
+                                <td>
+                                    <label for="">Username</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="field">
+                        <table id='fieldscaffolding'>
+                            <tr>
+                                <td>
+                                    <label for="">Password</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="password">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id='submitbtn'>
+                        <input type="button" value="Sign in">
                     </div>
                 </div>
-            </td>
-            <td>
-                <div id='parent-right'>
-                    Hey whta'
-                </div>
-            </td>
-        </tr>
-    </table>
+            </form>
+        </div>
+    </div>
+    <div id="right" class='parent'>
+
+    </div>
 </body>
 </html>

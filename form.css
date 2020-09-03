@@ -1,75 +1,119 @@
-body {
-    font-family: 'Poppins', sans-serif;
-    font-weight: light;
+* {
+    font-family: 'Nunito', sans-serif;
+    overflow: hidden;
 }
 
-label {
-    font-size: 30px;
+.parent {
+    /* display: flex; */
+    position: fixed;
+    top: 0;
 }
 
-td {
-    /* padding: 10px */
+#left {
+    /* background-color: tomato; */
+    left: 0;
+    height: 100%;
+    width: 375px;
 }
 
-input[type=text] {
-    color: rgba(0,0,0,0.8);
-    padding: 15px; font-size: larger; border: none; 
-    box-shadow: 0px 0px 5px 0.5px rgba(0,0,0,0.25);
-    border-radius: 20px;
+#right {
+    /* background-color: seagreen; */
+    background: url('assets/shopping-bag-wallpaper.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    right: 0;
+    height: 100%;
+    width: calc(100% - 375px);
 }
 
-input[type=text]:hover {
-    box-shadow: 0px 0px 7.5px 0.5px rgba(0,0,0,0.5);
-}
-
-input[type=text]:focus {
-    border-radius: 20px;
-    /* outline: 2.5px solid #2b8aff;  */
-    outline: none;
-    box-shadow: 0px 0px 7.5px 0.5px rgba(0,0,0,0.5);
-}
-
-/* .card {
-    height: 350px;
-    width: 600px;
-    background-color: snow;
-    border-radius: 25px;
-    -webkit-box-shadow: 0px 0px 10px 2.5px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 0px 0px 10px 2.5px rgba(0, 0, 0, 0.5);
-    box-shadow: 0px 0px 10px 2.5px rgba(0, 0, 0, 0.5);
-} */
-
-.formicons {
-    height: 40px;
-    width: 40px;
-}
-
-#main {
+#fieldholder {
+    /* background-color: whitesmoke; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     height: 100%;
     width: 100%;
 }
 
-#parent-right {
-    height: 100%;
-    /* width: 100%; */
-    background-color: saddlebrown;
-    background: url('assets/retro-computer-wallpaper.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+.field {
+    /* background: tomato; */
+    margin: 5px;
+    /* padding: 20px; */
+    width: 100%;
 }
 
-#parent-left {
-    height: 100%;
-    width: 10%;
-    background-color: royalblue;
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
+#fieldscaffolding {
+    /* background-color: turquoise; */
+    font-size: 20;
+    font-weight: 600;
+    width: 100%;
 }
 
-#login {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+td {
+    padding-left: 22.5px;
+    padding-right: 22.5px;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 7.5px;
+    padding-left: 12.5px;
+    font-size: 17.5;
+}
+
+#title {
+    /* background: tomato; */
+    font-family: 'Parisienne', cursive;
+    font-size: 45px;
+
+}
+
+#header {
+    position: absolute;
+    top: 50;
+}
+
+#submitbtn {
+    margin-top: 30px;
+    padding: 10px;
+}
+
+input[type=button] {
+    font-size: 20px;
+    height: 40px;
+    width: 100px;
+}
+
+#prompt {
+    width: 85%;
+}
+
+h1 {
+    font-size: 20px;
+    font-weight: 100;
+    opacity: 0.5;
+    overflow: hidden;
+    text-align: center;
+}
+
+h1:before, h1:after {
+    background-color: #000;
+    content: "";
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 50%;
+}
+
+h1:before {
+    right: 0.5em;
+    margin-left: -50%;
+}
+
+h1:after {
+    left: 0.5em;
+    margin-right: -50%;
 }
