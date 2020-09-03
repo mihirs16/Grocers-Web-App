@@ -4,20 +4,17 @@
 }
 
 .parent {
-    /* display: flex; */
     position: fixed;
     top: 0;
 }
 
 #left {
-    /* background-color: tomato; */
     left: 0;
     height: 100%;
     width: 375px;
 }
 
 #right {
-    /* background-color: seagreen; */
     background: url('assets/shopping-bag-wallpaper.jpg');
     background-size: cover;
     background-position: center;
@@ -25,10 +22,12 @@
     right: 0;
     height: 100%;
     width: calc(100% - 375px);
+    -webkit-box-shadow: inset 1px 0px 5px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: inset 1px 0px 5px 0px rgba(0,0,0,0.5);
+    box-shadow: inset 1px 0px 5px 0px rgba(0,0,0,0.5);
 }
 
 #fieldholder {
-    /* background-color: whitesmoke; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -38,14 +37,11 @@
 }
 
 .field {
-    /* background: tomato; */
     margin: 5px;
-    /* padding: 20px; */
     width: 100%;
 }
 
 #fieldscaffolding {
-    /* background-color: turquoise; */
     font-size: 20;
     font-weight: 600;
     width: 100%;
@@ -64,7 +60,6 @@ input[type=text], input[type=password] {
 }
 
 #title {
-    /* background: tomato; */
     font-family: 'Parisienne', cursive;
     font-size: 45px;
 
@@ -80,7 +75,7 @@ input[type=text], input[type=password] {
     padding: 10px;
 }
 
-input[type=button] {
+input[type=submit] {
     font-size: 20px;
     height: 40px;
     width: 100px;

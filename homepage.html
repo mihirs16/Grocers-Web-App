@@ -4,13 +4,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&family=Parisienne&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="form.css">
-    <title>Form</title>
+    <link rel="stylesheet" href="homepage.css">
+    <link rel="icon" href="assets/store-favicon.svg" type="image/gif" sizes="16x16">
+    <title>Grocers - Home</title>
 </head>
 <body>
     <div id="left" class='parent'>
         <div id="login">
-            <form action="">
+            <form id='dataform'>
                 <div id='fieldholder'>
                     <div id="header">
                         <table>
@@ -33,12 +34,14 @@
                         <table id='fieldscaffolding'>
                             <tr>
                                 <td>
-                                    <label for="">Username</label>
+                                    <div style='display: flex;'>
+                                        <label for="">Username&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#129497</label>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text">
+                                    <input type="text" id='username' required>
                                 </td>
                             </tr>
                         </table>
@@ -47,25 +50,32 @@
                         <table id='fieldscaffolding'>
                             <tr>
                                 <td>
-                                    <label for="">Password</label>
+                                    <div style='display: flex;'>
+                                        <label for="">Password&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#128272</label>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="password">
+                                    <input type="password" required>
                                 </td>
                             </tr>
                         </table>
                     </div>
                     <div id='submitbtn'>
-                        <input type="button" value="Sign in">
+                        <input type="submit" value="Sign in">
                     </div>
                 </div>
             </form>
+            <script>
+                $('#dataform').submit((event) => {
+                    event.preventDefault();
+                    window.location = 'products.html?username=' + document.getElementById('username').value;
+                });
+            </script>
         </div>
     </div>
     <div id="right" class='parent'>
-
     </div>
 </body>
 </html>
