@@ -7,15 +7,6 @@ body {
     background-color: #f7faff;
 }
 
-@keyframes overlay {
-    from {
-        left: -375px;
-    }
-    to {
-        left: 0;
-    }
-}
-
 .overlay {
     z-index: 5;
     display: block;

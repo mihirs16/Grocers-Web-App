@@ -1,0 +1,61 @@
+* {
+    font-family: 'Nunito', sans-serif;
+    overflow: hidden;
+}
+
+body {
+    background-color: #f7faff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#parent {
+    /* padding: 20px; */
+    height: 700px;
+    width: 800px;
+    border: 2px dashed black;    
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 80%;
+    margin-top: 20px;
+}
+
+td, th {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #dddddd;
+
+}
+
+th {
+    font-size: 25px;
+}
+
+input[type=submit], input[type=button] {
+    font-size: 20px;
+    height: 40px;
+    width: 100px;
+    margin: 10px
+}
+
+#buyerfam {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#btnfam {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: 10px; */
+}

@@ -93,6 +93,16 @@
         <br>
         <span id="date" style="font-size: 50px;"></span>
         <script>
+            daysOfTheWeek = {
+                0: 'Mon',
+                1: 'Tue',
+                2: 'Wed',
+                3: 'Thu',
+                4: 'Fri',
+                5: 'Sat',
+                6: 'Sun',                
+            }
+            var date = new Date();
             var xhr = new XMLHttpRequest();
             xhr.addEventListener("readystatechange", function () {
                 if(this.readyState === 4) {
@@ -105,10 +115,11 @@
             });
             xhr.open("GET", "https://api.openweathermap.org/data/2.5/weather?lat=28.7041&lon=77.1025&appid=f85211722ef46bf1ad91518984bc083f");
             xhr.send();
-
+            
             $(document).ready(() => {
                 $("#date").ready(() => {
-                    $("#date").text("Wed, 30");
+                    var disDate = (date.getDate() > 10) ? date.getDate().toString() : ('0' + date.getDate().toString());
+                    $("#date").text(daysOfTheWeek[date.getDay()] + ", " + disDate);
                 })
             });
         </script>
@@ -158,19 +169,33 @@
             </div>
         </div>
         <script>
+            var thisUrl = new URL(window.location.href);
+            let params = thisUrl.searchParams.get('allParams');
+            if (params) {
+                params = JSON.parse(params);
+                qtCount = params['cart']['qty'];
+                console.log(qtCount);
+                $(document).ready(() => {
+                    $('#buyer-name').val(params['name']);
+                    $('#buyer-email').val(params['email']);
+                    $('#buyer-number').val(params['number']);
+                    $('#buyer-address').val(params['address']);                
+                });
+            } else {
+                var qtCount = {
+                    'Apple': 0,
+                    'Banana': 0,
+                    'Orange': 0,
+                    'Tomato': 0,
+                    'Pear': 0,
+                };
+            }
             var prices = {
                 'Apple': 80,
                 'Banana': 60,
                 'Orange': 20,
                 'Tomato': 25,
                 'Pear': 50,
-            };
-            var qtCount = {
-                'Apple': 0,
-                'Banana': 0,
-                'Orange': 0,
-                'Tomato': 0,
-                'Pear': 0,
             };
             $(document).ready(function () {
                 $('#itemlist').ready(function () {
@@ -189,13 +214,16 @@
                     var thisItem = $('#itemtitle').text()
                     qtCount[thisItem] = thisVal;
                     // console.log(qtCount);
-                })
+                });
             });
 
             $('#dataform').submit((event) => {
                 event.preventDefault();
-                var allParams = {
-                    'cart': qtCount,
+                var allParams = { 
+                    'cart': {
+                        'prices': prices,
+                        'qty': qtCount
+                    },
                     'name': $('#buyer-name').val(),
                     'email': $('#buyer-email').val(),
                     'number': $('#buyer-number').val(),

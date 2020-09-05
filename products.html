@@ -12,10 +12,105 @@
 <body>
     <script>
         var thisUrl = new URL(window.location.href);
-        var usernameVar = thisUrl.searchParams.get('allParams');
-        console.log(JSON.parse(usernameVar));
+        let params = thisUrl.searchParams.get('allParams');
+        params = JSON.parse(params);
+        console.log(params);
+        $(document).ready(() => {
+            $('#parent').ready(() => {
+                $('td').ready(() => {
+                    var allQty = document.getElementsByClassName('qty');
+                    var allPrices = document.getElementsByClassName('price');
+                    var totalPrice = 0;
+                    for (var i=0;i<allPrices.length;i++) {
+                        allQty[i].innerText = params['cart']['qty'][allQty[i].id];
+                        allPrices[i].innerText = params['cart']['prices'][allPrices[i].id];
+                        totalPrice = totalPrice + (parseInt(allQty[i].innerText) * parseInt(allPrices[i].innerText));
+                    }
+                    document.getElementById('total').innerText = totalPrice.toString();
+                })
+            });
+            $('#buyer-name').text(params['name']);
+            $('#buyer-email').text(params['email']);
+            $('#buyer-number').text(params['number']);
+            $('#buyer-address').text(params['address']);
+            $('#confirm').click(() => {
+                alert('Ordered!');
+            });
+            $('#goback').click(() => {
+                window.location = 'homepage.html?allParams=' + JSON.stringify(params);
+            })
+        });
     </script>
 
-    
+    <div id='parent'>
+        <table>
+            <th>
+                Product
+            </th>
+            <th width='200px'>
+                Prices
+            </th>
+            <th width='200px'>
+                Quantity
+            </th>
+            <tr>
+                <td>Apple</td>
+                <td  class='price' id='Apple'></td>
+                <td class='qty' id='Apple'></td>
+            </tr>
+            <tr>
+                <td>Banana</td>
+                <td  class='price' id='Banana'></td>
+                <td class='qty' id='Banana'></td>
+            </tr>
+            <tr>
+                <td>Orange</td>
+                <td  class='price' id='Orange'></td>
+                <td class='qty' id='Orange'></td>
+            </tr>
+            <tr>
+                <td>Tomato</td>
+                <td  class='price' id='Tomato'></td>
+                <td class='qty' id='Tomato'></td>
+            </tr>
+            <tr>
+                <td>Pear</td>
+                <td  class='price' id='Pear'></td>
+                <td class='qty' id='Pear'></td>
+            </tr>
+            <tr>
+                <td style="font-size: 20px; font-weight: 700;">Total</td>
+                <td id='total' style="font-size: 20px; font-weight: 700;"></td>
+                <td></td>
+            </tr>
+        </table>
+
+        <div id='buyerfam'>
+            <table>
+                <tr>
+                    <td style="font-size: 20px; font-weight: 700;">Name</td>
+                    <td id='buyer-name'></td>
+                </tr>
+                <tr>
+                    <td style="font-size: 20px; font-weight: 700;">Email</td>
+                    <td id="buyer-email"></td>
+                </tr>
+                <tr>
+                    <td style="font-size: 20px; font-weight: 700;">Number</td>
+                    <td id="buyer-number"></td>
+                </tr>
+                <tr>
+                    <td style="font-size: 20px; font-weight: 700;">Address</td>
+                    <td id="buyer-address"></td>
+                </tr>
+            </table>
+        </div>
+
+        <div id='btnfam'>
+            <input type="button" value="Go Back" id='goback'>
+            <input type="button" value="Confirm" id='confirm'>
+        </div>
+    </div>
+
 </body>
 </html>
