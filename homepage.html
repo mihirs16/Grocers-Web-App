@@ -9,39 +9,25 @@
     <title>Grocers - Home</title>
 </head>
 <body>
-    <div id="left" class='parent'>
+    <div class="overlay" id="loginform" onload="$('.overlay').hide()">
         <div id="login">
             <form id='dataform'>
                 <div id='fieldholder'>
-                    <div id="header">
-                        <table>
-                            <tr>
-                                <td>
-                                    <img src="assets/store.svg" alt="" height="40px" width="40px" style='margin-left: calc(50% - 20px);'>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td id='title'>
-                                    Grocers
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
                     <div id='prompt'>
-                        <h1>Log in</h1>
+                        <h1>Buyer Details</h1>
                     </div>
                     <div class="field">
                         <table id='fieldscaffolding'>
                             <tr>
                                 <td>
                                     <div style='display: flex;'>
-                                        <label for="">Username&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#129497</label>
+                                        <label for="">Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &#129497</label>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" id='username' required>
+                                    <input type="text" id='buyer-name' required>
                                 </td>
                             </tr>
                         </table>
@@ -51,31 +37,174 @@
                             <tr>
                                 <td>
                                     <div style='display: flex;'>
-                                        <label for="">Password&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#128272</label>
+                                        <label for="">Email Address&emsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &#128231</label>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="password" required>
+                                    <input type="email" id='buyer-email' required>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="field">
+                        <table id='fieldscaffolding'>
+                            <tr>
+                                <td>
+                                    <div style='display: flex;'>
+                                        <label for="">Phone Number&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &#128222</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" pattern="[0-9]{10}" id='buyer-number' required>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="field">
+                        <table id='fieldscaffolding'>
+                            <tr>
+                                <td>
+                                    <div style='display: flex;'>
+                                        <label for="">Delivery Address&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &#127969</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" id='buyer-address' required>
                                 </td>
                             </tr>
                         </table>
                     </div>
                     <div id='submitbtn'>
-                        <input type="submit" value="Sign in">
+                        <input type="submit" value="Confirm">
                     </div>
                 </div>
             </form>
-            <script>
-                $('#dataform').submit((event) => {
-                    event.preventDefault();
-                    window.location = 'products.html?username=' + document.getElementById('username').value;
-                });
-            </script>
+        </div>
+    </div>
+
+    <div id="widget">
+        <span id="weather"></span>&deg C
+        <br>
+        <span id="date" style="font-size: 50px;"></span>
+        <script>
+            var xhr = new XMLHttpRequest();
+            xhr.addEventListener("readystatechange", function () {
+                if(this.readyState === 4) {
+                    $(document).ready(() => {
+                        $("#weather").ready(() => {
+                            $("#weather").text(Math.round(JSON.parse(this.responseText)['main']['temp'] - 273.15));
+                        })
+                    })
+                }
+            });
+            xhr.open("GET", "https://api.openweathermap.org/data/2.5/weather?lat=28.7041&lon=77.1025&appid=f85211722ef46bf1ad91518984bc083f");
+            xhr.send();
+
+            $(document).ready(() => {
+                $("#date").ready(() => {
+                    $("#date").text("Wed, 30");
+                })
+            });
+        </script>
+    </div>
+
+    <div id="left" class='parent'>
+        <div id="leftparent">
+            <div id="header">
+                <table>
+                    <tr>
+                        <td>
+                            <img src="assets/store.svg" alt="" height="40px" width="40px" style='margin-left: calc(50% - 20px);'>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id='title'>
+                            Grocers
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div style='margin-top: -20px;'>
+            <ul id="itemlist">
+                <li>Apple</li>
+                <li>Banana</li>
+                <li>Orange</li>
+                <li>Tomato</li>
+                <li>Pear</li>
+            </ul>
+
+            <input type="button" value="Checkout" style="margin-left: 125;" onclick="$('.overlay').show();">
         </div>
     </div>
     <div id="right" class='parent'>
+        <div id='itemdisplay'>
+            <div>
+                <img src="assets/items/Apple.svg" alt="" id="itemimg" width="250px" height="auto">
+            </div>
+            <div id="itemtitle">Apple</div>
+            <div id='itemfoot'>
+                <div id='itemprice'>
+                    <span id='thisprice'>80</span>₹
+                </div>
+                <input type="number" id="itemqt" max="99" min="0">
+            </div>
+        </div>
+        <script>
+            var prices = {
+                'Apple': 80,
+                'Banana': 60,
+                'Orange': 20,
+                'Tomato': 25,
+                'Pear': 50,
+            };
+            var qtCount = {
+                'Apple': 0,
+                'Banana': 0,
+                'Orange': 0,
+                'Tomato': 0,
+                'Pear': 0,
+            };
+            $(document).ready(function () {
+                $('#itemlist').ready(function () {
+                    $('li').click(function ()  {
+                        var thisItem = $(this).text();
+                        // console.log(thisItem);
+                        $('#itemimg').attr('src', 'assets/items/' + thisItem + '.svg');
+                        $('#itemtitle').text(thisItem);
+                        $('#thisprice').text(prices[thisItem]);
+                        $('#itemqt').val(qtCount[thisItem]);
+                    })
+                })
+                $('#itemqt').on('input', function () {
+                    var thisVal = $(this).val();
+                    // console.log(thisVal);
+                    var thisItem = $('#itemtitle').text()
+                    qtCount[thisItem] = thisVal;
+                    // console.log(qtCount);
+                })
+            });
+
+            $('#dataform').submit((event) => {
+                event.preventDefault();
+                var allParams = {
+                    'cart': qtCount,
+                    'name': $('#buyer-name').val(),
+                    'email': $('#buyer-email').val(),
+                    'number': $('#buyer-number').val(),
+                    'address': $('#buyer-address').val(),
+                }
+                window.location = 'products.html?allParams=' + JSON.stringify(allParams);
+            });
+        </script>
     </div>
+
 </body>
 </html>

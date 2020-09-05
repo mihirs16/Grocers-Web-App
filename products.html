@@ -10,55 +10,12 @@
     <title>Grocers - Products</title>
 </head>
 <body>
-    <div class='paragraph'>
-        <ul>
-            <li>first</li>
-            <li>second</li>
-            <li>third</li>
-        </ul>
-    </div>
-    <div id="widget">
-        <span id="weather"></span>&deg C
-        <br>
-        <span id="date" style="font-size: 50px;"></span>
-        <script>
-            var xhr = new XMLHttpRequest();
-            xhr.addEventListener("readystatechange", function () {
-                if(this.readyState === 4) {
-                    $(document).ready(() => {
-                        $("#weather").ready(() => {
-                            $("#weather").text(Math.round(JSON.parse(this.responseText)['main']['temp'] - 273.15));
-                        })
-                    })
-                }
-            });
-            xhr.open("GET", "https://api.openweathermap.org/data/2.5/weather?lat=28.7041&lon=77.1025&appid=f85211722ef46bf1ad91518984bc083f");
-            xhr.send();
+    <script>
+        var thisUrl = new URL(window.location.href);
+        var usernameVar = thisUrl.searchParams.get('allParams');
+        console.log(JSON.parse(usernameVar));
+    </script>
 
-            $(document).ready(() => {
-                $("#date").ready(() => {
-                    $("#date").text("Wed, 30");
-                })
-            });
-        </script>
-    </div>
-
-    <div id="left" class='parent'>
-        <div id='greeting'></div>
-        <script>
-            $(document).ready((event) => {
-                var thisUrl = new URL(window.location.href);
-                var usernameVar = thisUrl.searchParams.get('username');
-                $('#greeting').ready((event) => {
-                    document.getElementById('greeting').innerHTML = 'Welcome, ' + usernameVar + ' &#128075';
-                })
-            });
-        </script>
-
-    </div>
-    <div id="right" class='parent'>
-        
-    </div>
-
+    
 </body>
 </html>

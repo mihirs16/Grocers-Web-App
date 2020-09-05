@@ -3,28 +3,39 @@
     overflow: hidden;
 }
 
-.parent {
+body {
+    background-color: #f7faff;
+}
+
+@keyframes overlay {
+    from {
+        left: -375px;
+    }
+    to {
+        left: 0;
+    }
+}
+
+.overlay {
+    z-index: 5;
+    display: block;
+    display: none;
     position: fixed;
     top: 0;
-}
-
-#left {
     left: 0;
+    width: 100%;
     height: 100%;
-    width: 375px;
+    backdrop-filter: blur(5px);
+    background-color: rgba(5, 5, 5, 0.5); 
 }
 
-#right {
-    background: url('assets/shopping-bag-wallpaper.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    right: 0;
-    height: 100%;
-    width: calc(100% - 375px);
-    -webkit-box-shadow: inset 1px 0px 5px 0px rgba(0,0,0,0.5);
-    -moz-box-shadow: inset 1px 0px 5px 0px rgba(0,0,0,0.5);
-    box-shadow: inset 1px 0px 5px 0px rgba(0,0,0,0.5);
+#login {
+    position: relative;
+    top: calc(50% - 300px);
+    left: calc(50% - 200px);
+    background-color: whitesmoke;
+    height: 600px;
+    width: 400px;
 }
 
 #fieldholder {
@@ -33,6 +44,11 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+    width: 100%;
+}
+
+#leftparent {
+    height: 30%;
     width: 100%;
 }
 
@@ -52,7 +68,7 @@ td {
     padding-right: 22.5px;
 }
 
-input[type=text], input[type=password] {
+input[type=email], [type=text], input[type=password] {
     width: 100%;
     padding: 7.5px;
     padding-left: 12.5px;
@@ -62,12 +78,12 @@ input[type=text], input[type=password] {
 #title {
     font-family: 'Parisienne', cursive;
     font-size: 45px;
-
 }
 
 #header {
     position: absolute;
     top: 50;
+    left: 100;
 }
 
 #submitbtn {
@@ -75,7 +91,7 @@ input[type=text], input[type=password] {
     padding: 10px;
 }
 
-input[type=submit] {
+input[type=submit], input[type=button] {
     font-size: 20px;
     height: 40px;
     width: 100px;
@@ -83,6 +99,7 @@ input[type=submit] {
 
 #prompt {
     width: 85%;
+    margin-top: 0px;
 }
 
 h1 {
@@ -112,3 +129,105 @@ h1:after {
     left: 0.5em;
     margin-right: -50%;
 }
+
+#widget {
+    bottom: 0;
+    left: 60;
+    position: fixed;
+    padding: 15px;
+    font-size: 75px;
+    font-weight: 200;
+    width: 350px;
+}
+
+.parent {
+    position: fixed;
+    top: 0;
+}
+
+#left {
+    left: 0;
+    height: 100%;
+    width: 375px;
+}
+
+#right {
+    background: #9AACC0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    right: 0;
+    height: 100%;
+    width: calc(100% - 375px);
+    box-shadow: inset 1px 0px 5px 0px rgba(0,0,0,0.5);
+}
+
+#greeting {
+    position: relative;
+    width: 100%;
+    top: 10;
+    left: 110;
+    font-size: 30px;
+}
+
+li {
+    margin: 10px;
+    padding: 10px;
+    width: 75%;
+    box-shadow: 0.5px 0px 2.5px 0px rgba(0,0,0,0.25);    
+}
+
+li:hover {
+    /* background-color: tomato; */
+    margin-left: 30px;
+}
+
+#itemdisplay {
+    position: relative;
+    top: 10%;
+    left: calc(50% - 250px);
+    width: 500px;
+    background-color: #F7FAFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 1px 0px 5px 0px rgba(0,0,0,0.5);
+}
+
+#itemimg {
+    padding-top: 10%;
+    padding-bottom: 10%;    
+    padding-left: calc(50% - 125px);
+}
+
+#itemtitle {
+    font-size: 50px;
+    padding: 10%;
+    /* width: 100%; */
+}
+
+#itemfoot {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+}
+
+#itemprice {
+    width: 65px;
+    height: 40px;
+    font-size: 30px;
+    text-align: center;
+    border: 2px dashed black;
+    margin-left: 10px;
+}
+
+#itemqt {
+    width: 65px;
+    height: 40px;
+    font-size: 30px;
+    text-align: center;
+    margin-left: 340px;
+    border: 2px solid black;
+}
+
