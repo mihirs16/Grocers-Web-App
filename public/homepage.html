@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&family=Parisienne&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="homepage.css">
+    <link rel="stylesheet" href="catalogue.css">
     <link rel="icon" href="assets/store-favicon.svg" type="image/gif" sizes="16x16">
     <title>Grocers - Home</title>
 </head>
@@ -14,30 +14,14 @@
             <form id='dataform'>
                 <div id='fieldholder'>
                     <div id='prompt'>
-                        <h1>Buyer Details</h1>
+                        <h1>Login</h1>
                     </div>
                     <div class="field">
                         <table id='fieldscaffolding'>
                             <tr>
                                 <td>
                                     <div style='display: flex;'>
-                                        <label for="">Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &#129497</label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="text" id='buyer-name' required>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="field">
-                        <table id='fieldscaffolding'>
-                            <tr>
-                                <td>
-                                    <div style='display: flex;'>
-                                        <label for="">Email Address&emsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &#128231</label>
+                                        <label for="">Email-ID&nbsp;&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &#129497</label>
                                     </div>
                                 </td>
                             </tr>
@@ -53,35 +37,24 @@
                             <tr>
                                 <td>
                                     <div style='display: flex;'>
-                                        <label for="">Phone Number&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &#128222</label>
+                                        <label for="">Password&emsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &#128272</label>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" pattern="[0-9]{10}" id='buyer-number' required>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="field">
-                        <table id='fieldscaffolding'>
-                            <tr>
-                                <td>
-                                    <div style='display: flex;'>
-                                        <label for="">Delivery Address&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &#127969</label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="text" id='buyer-address' required>
+                                    <input type="password" id='buyer-paswd' required>
                                 </td>
                             </tr>
                         </table>
                     </div>
                     <div id='submitbtn'>
-                        <input type="submit" value="Confirm">
+                        <input type="submit" value="Login">
+                    </div>
+                    <div>
+                        <p style="font-size: 20px;">
+                            Not a member yet? <a href="http://localhost:8080/register">Sign up</a>
+                        </p>
                     </div>
                 </div>
             </form>
@@ -175,12 +148,6 @@
                 params = JSON.parse(params);
                 qtCount = params['cart']['qty'];
                 console.log(qtCount);
-                $(document).ready(() => {
-                    $('#buyer-name').val(params['name']);
-                    $('#buyer-email').val(params['email']);
-                    $('#buyer-number').val(params['number']);
-                    $('#buyer-address').val(params['address']);                
-                });
             } else {
                 var qtCount = {
                     'Apple': 0,
@@ -202,7 +169,7 @@
                     $('li').click(function ()  {
                         var thisItem = $(this).text();
                         // console.log(thisItem);
-                        $('#itemimg').attr('src', 'assets/items/' + thisItem + '.svg');
+                        $('#itemimg').attr('src', "assets/items/" + thisItem + ".svg");
                         $('#itemtitle').text(thisItem);
                         $('#thisprice').text(prices[thisItem]);
                         $('#itemqt').val(qtCount[thisItem]);
@@ -219,17 +186,43 @@
 
             $('#dataform').submit((event) => {
                 event.preventDefault();
-                var allParams = { 
-                    'cart': {
-                        'prices': prices,
-                        'qty': qtCount
-                    },
-                    'name': $('#buyer-name').val(),
-                    'email': $('#buyer-email').val(),
-                    'number': $('#buyer-number').val(),
-                    'address': $('#buyer-address').val(),
+
+                user = {
+                    _id: $('#buyer-email').val(),
+                    password: $('#buyer-paswd').val()
                 }
-                window.location = 'products.html?allParams=' + JSON.stringify(allParams);
+
+                var myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
+
+                var requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: JSON.stringify(user),
+                };
+
+                fetch("http://localhost:8080/members/login", requestOptions)
+                .then(response => response.json())
+                .then((result) => {
+                    console.log(result);
+                    if (result.success) {
+                        var allParams = { 
+                            'cart': {
+                                'prices': prices,
+                                'qty': qtCount
+                            },
+                            'name': result.user.name,
+                            'email': result.user._id,
+                            'number': result.user.contact_no,
+                            'address': result.user.address
+                        }
+                        // console.log(allParams);
+                        window.location = 'products.html?allParams=' + JSON.stringify(allParams);
+                    } else {
+                        alert(result.msg);
+                    }
+                })
+                .catch(error => console.log('error', error));                
             });
         </script>
     </div>

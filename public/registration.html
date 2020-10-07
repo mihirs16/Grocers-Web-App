@@ -1,0 +1,145 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&family=Parisienne&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="catalogue.css">
+    <link rel="icon" href="assets/store-favicon.svg" type="image/gif" sizes="16x16">
+    <title>Grocers - Register</title>
+</head>
+<body>
+    <div class="overlay" id="loginform" style="display: block;">
+        <div id="login" style="height: 650px; top: calc(50% - 325px);">
+            <form id='dataform'>
+                <div id='fieldholder'>
+                    <div id='prompt'>
+                        <h1>Register</h1>
+                    </div>
+                    <div class="field">
+                        <table id='fieldscaffolding'>
+                            <tr>
+                                <td>
+                                    <div style='display: flex;'>
+                                        <label for="">Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &#129497</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" id='reg-name' required>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="field">
+                        <table id='fieldscaffolding'>
+                            <tr>
+                                <td>
+                                    <div style='display: flex;'>
+                                        <label for="">Email Address&emsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &#128231</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="email" id='reg-email' required>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="field">
+                        <table id='fieldscaffolding'>
+                            <tr>
+                                <td>
+                                    <div style='display: flex;'>
+                                        <label for="">Password&emsp;&emsp;&emsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &#128272</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="password" id='reg-pswd' required>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="field">
+                        <table id='fieldscaffolding'>
+                            <tr>
+                                <td>
+                                    <div style='display: flex;'>
+                                        <label for="">Phone Number&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &#128222</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" pattern="[0-9]{10}" id='reg-no' required>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="field">
+                        <table id='fieldscaffolding'>
+                            <tr>
+                                <td>
+                                    <div style='display: flex;'>
+                                        <label for="">Delivery Address&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &#127969</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" id='reg-addr' required>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id='submitbtn'>
+                        <input type="submit" value="Register">
+                    </div>
+                    <div>
+                        <p style="font-size: 20px;">
+                            Already a member? Go to <a href="http://localhost:8080/">Catalogue</a>
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+
+        $('#dataform').submit((event) => {
+            event.preventDefault();
+
+            var user = {
+                "_id": $('#reg-email').val(),
+                "password": $('#reg-pswd').val(),
+                "name": $('#reg-name').val(),
+                "contact_no": $('#reg-no').val(),
+                "address": $('#reg-addr').val()
+            };
+            console.log(user);
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: JSON.stringify(user),
+            };
+
+            fetch("http://localhost:8080/members/register", requestOptions)
+            .then(response => response.json())
+            .then((result) => {
+                // console.log(result);
+                alert(result.msg);
+            })
+            .catch(error => console.log('error', error));                
+        });
+    </script>
+
+</body>
+</html>
